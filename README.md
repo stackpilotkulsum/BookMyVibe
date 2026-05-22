@@ -42,7 +42,7 @@ Before running the application, ensure you have:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/BookMyVibe.git
+git clone https://github.com/stackpilotkulsum/BookMyVibe.git
 cd BookMyVibe
 ```
 
@@ -204,8 +204,8 @@ This project is licensed under the ISC License - see the LICENSE file for detail
 
 ## 👤 Author
 
-**Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
+**Kulsum Malik**
+- GitHub: [@stackpilotkulsum](https://github.com/stackpilotkulsum)
 
 ## 📞 Support
 
