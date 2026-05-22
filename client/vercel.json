@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "buildCommand": "CI=false npm run build",
+  "installCommand": "npm install",
+  "outputDirectory": "build",
+  "env": {
+    "CI": "false",
+    "REACT_APP_API_URL": "https://bookmyvibe-backend.onrender.com"
+  }
+}

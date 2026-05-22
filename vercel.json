@@ -1,7 +1,0 @@
-{
-  "buildCommand": "cd client && CI=false npm run build",
-  "installCommand": "cd client && npm install",
-  "env": {
-    "CI": "false"
-  }
-}
