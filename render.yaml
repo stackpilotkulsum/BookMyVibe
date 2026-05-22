@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: bookmyvibe-backend
+    plan: free
+    runtime: node
+    buildCommand: npm install
+    startCommand: node server.js
+    autoDeploy: true
+    healthCheckPath: /health
+    healthCheckInterval: 300  # Check every 5 minutes
+    maxShutdownDelaySeconds: 30
+
+  - type: cron
+    name: keep-backend-alive
+    schedule: "*/14 * * * *"  # Every 14 minutes
+    runCommand: "curl https://bookmyvibe-backend.onrender.com/health"

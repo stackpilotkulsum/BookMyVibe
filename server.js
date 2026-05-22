@@ -304,6 +304,11 @@ app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
+// Health check endpoint (keeps backend alive on Render)
+app.get("/health", (req, res) => {
+  res.json({ status: "OK", timestamp: new Date() });
+});
+
 // Start Server
 const PORT = process.env.PORT || 5000;
 
