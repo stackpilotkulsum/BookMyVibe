@@ -1,0 +1,11 @@
+# Vercel ignore rules
+node_modules
+.git
+.env
+.env.local
+npm-debug.log*
+.DS_Store
+models/
+routes/
+server.js
+package.json
