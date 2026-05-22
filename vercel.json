@@ -1,23 +1,11 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "client/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "client/build",
-        "buildCommand": "CI=false npm run build"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "client/build/index.html"
-    }
-  ],
+  "buildCommand": "cd client && CI=false npm run build",
+  "installCommand": "cd client && npm install",
+  "outputDirectory": "client/build",
+  "framework": "react",
   "env": {
     "CI": "false",
     "REACT_APP_API_URL": "https://bookmyvibe-backend.onrender.com"
   }
 }
+
