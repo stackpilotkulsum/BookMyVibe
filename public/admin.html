@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="/index.html">Home</a>
+    <a href="/events.html">Events</a>
+    <a href="/register.html">Register</a>
+    <a href="/login.html">User Login</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/mybookings.html">My Tickets</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="/adminlogin.html">Admin Login</a>
+  </div>
+</nav>
+<div class="container">
+  <h2>🛠 Admin Dashboard</h2>
+
+  <p id="stats"></p>
+  <div id="adminBookings"></div>
+</div>
+
+<script>
+
+const API_BASE = "";
+
+// Check if user is logged in
+const token = localStorage.getItem("token");
+const role = localStorage.getItem("role");
+
+if (!token) {
+  alert("Please login first");
+  window.location.href = "/login.html";
+}
+
+if (role !== "admin") {
+  alert("Access denied. Admins only.");
+  window.location.href = "/index.html";
+}
+
+// Fetch all bookings
+fetch(`${API_BASE}/allbookings`)
+.then(res => res.json())
+.then(data => {
+
+  let total = data.length;
+  let revenue = total * 150;
+
+  document.getElementById("stats").innerHTML =
+    `🎟 Tickets Sold: ${total} <br> 💰 Revenue: ₹${revenue}`;
+
+  const box = document.getElementById("adminBookings");
+
+  box.innerHTML = "";
+
+  data.forEach(b => {
+    box.innerHTML += `
+      <div class="ticket-card">
+        <b>${b.eventName}</b> | ${b.seat} | ${b.userEmail}
+      </div>
+    `;
+  });
+
+})
+.catch(err => {
+  document.getElementById("stats").innerText = "Error loading bookings";
+});
+
+</script>
+
+</body>
+</html>

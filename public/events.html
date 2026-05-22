@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Events</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="/index.html">Home</a>
+    <a href="/events.html">Events</a>
+    <a href="/register.html">Register</a>
+    <a href="/login.html">User Login</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/mybookings.html">My Tickets</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="/adminlogin.html">Admin Login</a>
+  </div>
+</nav>
+<div class="container">
+  <h2>🎉 Available Events</h2>
+
+  <div class="ticket-card">
+    Music Night – ₹150
+    <button onclick="book('Music Night', 'A1')">Book Now</button>
+  </div>
+
+  <div class="ticket-card">
+    Tech Conference – ₹200
+    <button onclick="book('Tech Conference', 'B1')">Book Now</button>
+  </div>
+
+  <div class="ticket-card">
+    Comedy Show – ₹120
+    <button onclick="book('Comedy Show', 'C1')">Book Now</button>
+  </div>
+
+  <div class="ticket-card">
+    Drama Theatre – ₹180
+    <button onclick="book('Drama Theatre', 'D1')">Book Now</button>
+  </div>
+
+  <p id="msg"></p>
+
+</div>
+
+<script>
+
+function book(eventName, seat) {
+
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    alert("Please login first to book tickets");
+    window.location.href = "/login.html";
+    return;
+  }
+
+  // Store selection temporarily
+  localStorage.setItem("selectedEvent", eventName);
+  localStorage.setItem("selectedSeat", seat);
+
+  document.getElementById("msg").innerText =
+    "Event selected: " + eventName + ". Redirecting to payment...";
+
+  setTimeout(() => {
+    window.location.href = "/payment.html";
+  }, 1000);
+}
+
+</script>
+
+</body>
+</html>

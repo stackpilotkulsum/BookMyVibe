@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="/index.html">Home</a>
+    <a href="/events.html">Events</a>
+    <a href="/register.html">Register</a>
+    <a href="/login.html">User Login</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/mybookings.html">My Tickets</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="/adminlogin.html">Admin Login</a>
+  </div>
+</nav>
+<div class="container">
+  <h2>Create Account</h2>
+
+  <input id="name" placeholder="Full Name">
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
+
+  <button onclick="register()">Register</button>
+
+  <p id="msg"></p>
+
+  <p>Already registered? <a href="/login.html">Login</a></p>
+</div>
+
+<script>
+
+const API_BASE = "";
+
+function register() {
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  fetch(`${API_BASE}/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      name,
+      email,
+      password
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      document.getElementById("msg").innerText =
+        "Registration successful! Please login.";
+
+      setTimeout(() => {
+        window.location.href = "/login.html";
+      }, 1500);
+
+    } else {
+      document.getElementById("msg").innerText =
+        data.message || "Registration failed";
+    }
+  })
+  .catch(err => {
+    document.getElementById("msg").innerText =
+      "Server error";
+  });
+}
+
+</script>
+
+</body>
+</html>

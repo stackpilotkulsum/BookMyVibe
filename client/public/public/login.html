@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="/index.html">Home</a>
+    <a href="/events.html">Events</a>
+    <a href="/register.html">Register</a>
+    <a href="/login.html">User Login</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/mybookings.html">My Tickets</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="/adminlogin.html">Admin Login</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h2>Login</h2>
+
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
+
+  <button onclick="login()">Login</button>
+
+  <p id="msg"></p>
+<p>
+  Are you an admin?  
+  <a href="/adminlogin.html">Login as Admin</a>
+</p>
+
+</div>
+
+<script>
+
+const API_BASE = "";
+
+function login() {
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  fetch(`${API_BASE}/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email, password })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.token) {
+
+      // STORE ALL REQUIRED INFO
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("role", data.role);
+      localStorage.setItem("email", email);   // 🔥 IMPORTANT LINE ADDED
+
+      document.getElementById("msg").innerText =
+        "Login successful!";
+
+      setTimeout(() => {
+        window.location.href = "/dashboard.html";
+      }, 1000);
+
+    } else {
+      document.getElementById("msg").innerText =
+        data.message || "Login failed";
+    }
+  })
+  .catch(err => {
+    document.getElementById("msg").innerText =
+      "Error connecting to server";
+  });
+}
+
+</script>
+
+</body>
+</html>

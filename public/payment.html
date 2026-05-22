@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Payment</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="/index.html">Home</a>
+    <a href="/events.html">Events</a>
+    <a href="/register.html">Register</a>
+    <a href="/login.html">User Login</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/mybookings.html">My Tickets</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="/adminlogin.html">Admin Login</a>
+  </div>
+</nav>
+<div class="container">
+  <h2>💳 Payment</h2>
+
+  <input id="card" placeholder="Card Number" required>
+  <input id="name" placeholder="Name on Card" required>
+  <input id="expiry" placeholder="Expiry Date" required>
+  <input id="cvv" placeholder="CVV" required>
+
+  <button onclick="makePayment()">Pay Now</button>
+
+  <p id="msg"></p>
+</div>
+
+<script>
+
+const API_BASE = "";
+
+// Check login
+const token = localStorage.getItem("token");
+
+if (!token) {
+  alert("Please login first");
+  window.location.href = "/login.html";
+}
+
+const eventName = localStorage.getItem("selectedEvent");
+const seat = localStorage.getItem("selectedSeat");
+const email = localStorage.getItem("email");   // store email during login
+
+function makePayment() {
+
+  if (!eventName || !seat) {
+    document.getElementById("msg").innerText = "No event selected!";
+    return;
+  }
+
+  fetch(`${API_BASE}/book`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      eventName: eventName,
+      seat: seat,
+      userEmail: email
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+
+      document.getElementById("msg").innerText =
+        "Payment Successful! Ticket Booked.";
+
+      localStorage.removeItem("selectedEvent");
+      localStorage.removeItem("selectedSeat");
+
+      setTimeout(() => {
+        window.location.href = "/mybookings.html";
+      }, 1500);
+
+    } else {
+      document.getElementById("msg").innerText =
+        data.message || "Payment failed";
+    }
+  })
+  .catch(err => {
+    document.getElementById("msg").innerText = "Server error";
+  });
+}
+
+</script>
+
+</body>
+</html>

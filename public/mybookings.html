@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Bookings</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="/index.html">Home</a>
+    <a href="/events.html">Events</a>
+    <a href="/register.html">Register</a>
+    <a href="/login.html">User Login</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/mybookings.html">My Tickets</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="/adminlogin.html">Admin Login</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h2>🎟 My Tickets</h2>
+
+  <div id="tickets"></div>
+</div>
+
+<script>
+
+const API_BASE = "";
+
+// Check if user is logged in
+const token = localStorage.getItem("token");
+const email = localStorage.getItem("email");
+
+if (!token || !email) {
+  alert("Please login first");
+  window.location.href = "/login.html";
+}
+
+// Fetch bookings for this user
+fetch(`${API_BASE}/mybookings?email=${email}`)
+  .then(res => res.json())
+  .then(data => {
+
+    const box = document.getElementById("tickets");
+
+    box.innerHTML = "";
+
+    if (data.length === 0) {
+      box.innerHTML = "No bookings found";
+      return;
+    }
+
+    data.forEach(b => {
+      box.innerHTML += `
+        <div class="ticket-card">
+          <b>Event:</b> ${b.eventName} <br>
+          <b>Seat:</b> ${b.seat}
+        </div>
+      `;
+    });
+
+  })
+  .catch(err => {
+    document.getElementById("tickets").innerText =
+      "Error loading bookings";
+  });
+
+</script>
+
+</body>
+</html>

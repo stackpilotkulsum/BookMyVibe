@@ -1,0 +1,214 @@
+/* ===== GLOBAL RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+/* ===== PAGE BACKGROUND ===== */
+body {
+  background: linear-gradient(135deg, #141E30, #243B55);
+  min-height: 100vh;
+}
+
+/* ===== NAVBAR ===== */
+nav {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  background: rgba(255,255,255,0.15);
+  color: #FFD200;
+}
+
+/* ===== MAIN CONTAINER FOR ALL PAGES ===== */
+.container {
+  width: 85%;
+  margin: 30px auto;
+  text-align: center;
+  color: white;
+}
+
+/* ===== LOGIN / REGISTER BOX STYLE ===== */
+.form-box {
+  width: 380px;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(15px);
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: 0 0 40px rgba(255,215,0,0.4);
+  margin: 40px auto;
+  color: white;
+}
+
+/* ===== HEADINGS ===== */
+h2 {
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #F7971E, #FFD200);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===== INPUTS ===== */
+input {
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  color: white;
+  outline: none;
+}
+
+input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+input:focus {
+  border-color: #FFD200;
+  box-shadow: 0 0 12px rgba(255,210,0,0.8);
+}
+
+/* ===== BUTTONS ===== */
+button {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #F7971E, #FFD200);
+  color: #141E30;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  box-shadow: 0 0 25px rgba(255,215,0,0.8);
+  transform: translateY(-2px);
+}
+
+/* ===== HERO BOX ON HOMEPAGE ===== */
+.hero {
+  background: linear-gradient(to right, #141e30, #243b55);
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+
+  width: 70%;
+  margin: 20px auto;
+}
+
+.hero h1 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+/* ===== HOMEPAGE GALLERY ===== */
+.modern-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  transition: 0.4s;
+}
+
+.card:hover img {
+  transform: scale(1.1);
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  width: 100%;
+  text-align: center;
+  padding: 8px;
+  font-weight: bold;
+}
+
+/* ===== TICKET CARDS ===== */
+.ticket-card {
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.1);
+  transition: 0.3s;
+}
+
+.ticket-card:hover {
+  transform: scale(1.05);
+}
+
+/* ===== SEAT MAP ===== */
+#seatMap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.row {
+  display: flex;
+}
+
+.seat {
+  background: #333;
+  color: white;
+  padding: 10px 14px;
+  margin: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.seat:hover {
+  background: #FFD200;
+  color: black;
+}
+
+.seat.selected {
+  background: #F7971E;
+  color: black;
+}
+
+/* ===== LINKS ===== */
+a {
+  color: #FFD200;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #F7971E;
+}

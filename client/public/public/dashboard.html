@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="/index.html">Home</a>
+    <a href="/events.html">Events</a>
+    <a href="/register.html">Register</a>
+    <a href="/login.html">User Login</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/mybookings.html">My Tickets</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="/adminlogin.html">Admin Login</a>
+  </div>
+</nav>
+
+
+<div class="container">
+  <h2>🎟 Book Ticket</h2>
+
+  <input id="eventName" placeholder="Event Name" required>
+  <input type="date" id="date" required>
+
+  <h3>Select Seat</h3>
+
+  <div id="seatMap">
+    <div class="row">
+      <span class="seat">A1</span>
+      <span class="seat">A2</span>
+      <span class="seat">A3</span>
+      <span class="seat">A4</span>
+    </div>
+    <div class="row">
+      <span class="seat">B1</span>
+      <span class="seat">B2</span>
+      <span class="seat">B3</span>
+      <span class="seat">B4</span>
+    </div>
+  </div>
+
+  <button onclick="bookTicket()">Proceed to Payment</button>
+
+  <p id="msg"></p>
+</div>
+
+<script>
+
+// Check login
+const token = localStorage.getItem("token");
+
+if (!token) {
+  alert("Please login first");
+  window.location.href = "/login.html";
+}
+
+let selectedSeat = "";
+
+const seats = document.querySelectorAll(".seat");
+
+seats.forEach(seat => {
+  seat.addEventListener("click", () => {
+    seats.forEach(s => s.classList.remove("selected"));
+    seat.classList.add("selected");
+    selectedSeat = seat.innerText;
+  });
+});
+
+function bookTicket() {
+
+  const eventName = document.getElementById("eventName").value;
+  const date = document.getElementById("date").value;
+
+  if (!eventName || !date || !selectedSeat) {
+    document.getElementById("msg").innerText =
+      "Please select event, date and seat";
+    return;
+  }
+
+  // Save details temporarily
+  localStorage.setItem("selectedEvent", eventName);
+  localStorage.setItem("selectedSeat", selectedSeat);
+  localStorage.setItem("selectedDate", date);
+
+  document.getElementById("msg").innerText =
+    "Details saved. Redirecting to payment...";
+
+  setTimeout(() => {
+    window.location.href = "/payment.html";
+  }, 1000);
+}
+
+</script>
+
+</body>
+</html>
