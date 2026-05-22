@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 function Home() {
   return (
     <>
-      <marquee className="marquee-text">
-        Book Tickets for Concerts, Sports, Movies and More!
-      </marquee>
+      <div className="marquee-text">
+        <span className="scroll-text">Book Tickets for Concerts, Sports, Movies and More!</span>
+      </div>
 
       <div className="container">
         <div className="hero">
